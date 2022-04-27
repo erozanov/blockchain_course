@@ -40,6 +40,6 @@ console.log("	verified:", verified);
 // => true
 
 
-function digest(str, algo = "sha512") {
+function digest(str, algo = "sha256") {
   return crypto.createHash(algo).update(str).digest();
 }
