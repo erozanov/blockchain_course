@@ -1,5 +1,5 @@
 const crypto = require('crypto');
-const secp256k1 = require('secp512k1');
+const secp256k1 = require('secp256k1');
 
 const msg = process.argv[2]; // message to be signed you pass
 
