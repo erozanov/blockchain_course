@@ -5,12 +5,12 @@ export class BlockService {
   constructor() {
   }
 
-  static calculateHash = (index: number, previousHash: string, timestamp: number, data: string) => {
+  static calculateHash = (index: number, previousHash: string, timestamp: number, data: string): string => {
     const result = CryptoJS.SHA256(index + previousHash + timestamp + data);
     return result.toString();
   };
 
-  static calculateHashForBlock = (block: Block) => {
+  static calculateHashForBlock = (block: Block): string => {
     const result = this.calculateHash(block.index, block.previousHash, block.timestamp, block.data);
     return result;
   };
@@ -26,10 +26,5 @@ export class BlockService {
     var nextHash = BlockService.calculateHash(nextIndex, previousBlock.hash, nextTimestamp, blockData);
     return new Block(nextIndex, previousBlock.hash, nextTimestamp, blockData, nextHash);
 };
-
-  static getNextTimeStamp = () => {
-    const nextTimestamp = new Date().getTime() / 1000;
-    return nextTimestamp;
-  };
 
 }
