@@ -11,8 +11,7 @@ export class Block {
     this.previousHash = previousHash;
     this.timestamp = timestamp;
     this.data = data;
-    if (hash != null) {
-      this.hash = hash.toString();
-    }
+    this.hash = hash.toString();
   }
+
 }

@@ -14,7 +14,6 @@ describe('BlockChainService', () => {
     const state = blockchainService.getBlockchainState();
     expect(nextBlock).not.toBeNull;
     expect(state.length).toEqual(2);
-
   })
   
 })

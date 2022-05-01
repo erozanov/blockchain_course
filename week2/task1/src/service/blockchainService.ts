@@ -20,7 +20,7 @@ export class BlockchainService {
 
   getLatestBlock = (): Block => this.blockchain[this.blockchain.length - 1];
 
-  addBlock = (newBlock): void => {
+  addBlock = (newBlock: Block): void => {
     if (this.isValidNewBlock(newBlock, this.getLatestBlock())) {
         this.blockchain.push(newBlock);
     }
