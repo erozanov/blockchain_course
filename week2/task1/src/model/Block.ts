@@ -1,5 +1,3 @@
-const CryptoJS = require('crypto-js');
-
 export class Block {
   index: number;
   previousHash: string;
@@ -13,5 +11,4 @@ export class Block {
     this.data = data;
     this.hash = hash.toString();
   }
-
 }
