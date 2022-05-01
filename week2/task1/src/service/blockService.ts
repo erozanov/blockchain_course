@@ -4,7 +4,7 @@ import { Block } from '../model/Block';
 export class BlockService {
   constructor() {
   }
-
+  
   static calculateHash = (block: Block) => {
     const result = CryptoJS.SHA256(block.index + block.previousHash + block.timestamp + block.data);
     return result.toString();
