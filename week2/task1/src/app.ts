@@ -1,7 +1,6 @@
 import express from 'express';
 import { Block } from './model/Block';
 import { BlockchainService } from './service/blockchainService';
-import { BlockService } from './service/blockService';
 const app = express();
 const port = 3000;
 
@@ -12,6 +11,18 @@ app.get('/', (req, res) => {
 });
 
 app.get('/blocks', (req, res) => res.send(JSON.stringify(blockchainService.getBlockchainState())));
+
+app.post('/mineBlock', (req, res) => {
+  var newBlock = blockchainService.mineBlock(req.body.data);
+  //broadcast(responseLatestMsg());
+  console.log('block added: ' + JSON.stringify(newBlock));
+  res.send();
+});
+
+app.post('/addPeer', (req, res) => {
+  // connectToPeers([req.body.peer]);
+  res.send();
+});
 
 app.listen(port, () => {
   blockchainService = new BlockchainService();
