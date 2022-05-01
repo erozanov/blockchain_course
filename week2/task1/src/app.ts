@@ -1,5 +1,4 @@
 import express from 'express';
-import { Block } from './model/Block';
 import { BlockchainService } from './service/blockchainService';
 import bodyParser from 'body-parser';
 
