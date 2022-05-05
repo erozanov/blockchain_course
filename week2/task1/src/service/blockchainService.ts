@@ -15,8 +15,33 @@ export class BlockchainService {
     const latestBlock = this.getLatestBlock();
     const nextBlock = BlockService.generateNextBlock(data, latestBlock);
     this.addBlock(nextBlock);
-    return
+    return;
   }
+
+   replaceChain = (newBlocks): boolean => {
+    if (this.isValidChain(newBlocks) && newBlocks.length > this.blockchain.length) {
+        console.log('Received blockchain is valid. Replacing current blockchain with received blockchain');
+        this.blockchain = newBlocks;
+        return true;
+    } else {
+        console.log('Received blockchain invalid');
+    }
+  }
+
+   isValidChain = (blockchainToValidate: [Block]) => {
+    if (JSON.stringify(blockchainToValidate[0]) !== JSON.stringify(BlockService.getGenesisBlock())) {
+        return false;
+    }
+    var tempBlocks = [blockchainToValidate[0]];
+    for (var i = 1; i < blockchainToValidate.length; i++) {
+        if (this.isValidNewBlock(blockchainToValidate[i], tempBlocks[i - 1])) {
+            tempBlocks.push(blockchainToValidate[i]);
+        } else {
+            return false;
+        }
+    }
+    return true;
+};
 
   getLatestBlock = (): Block => this.blockchain[this.blockchain.length - 1];
 
