@@ -26,4 +26,4 @@ https://thirdweb.com/dashboard/rinkeby/vote/0x85C668d32E490e634D0EBfb337e220720a
 
 ### Result of forth task
 
-![alt Result](/src/Result.png)
+![alt text](https://github.com/erozanov/blockchain_course/blob/master/week3/task4/src/Result.png?raw=true)
