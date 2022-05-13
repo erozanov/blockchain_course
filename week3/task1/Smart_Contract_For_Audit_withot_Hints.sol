@@ -13,10 +13,12 @@ contract VulnerableOne {
 
     struct UserInfo {
         uint256 created;
+	//indention problem
 		uint256 ether_balance;
     }
 
     mapping (address => UserInfo) public users_map;
+	//indention here and below
 	mapping (address => bool) is_super_user;
 	address[] users_list;
 	// Not sure it's a bug. But I found we can execute onlySuperUser without parentheses 
@@ -32,13 +34,14 @@ contract VulnerableOne {
 		set_super_user(msg.sender);
 		add_new_user(msg.sender);
 	}
-
+        //indentation problems here and below
 	function set_super_user(address _new_super_user) public {
 		is_super_user[_new_super_user] = true;
 	}
 
 	function pay() public payable {
 		require(users_map[msg.sender].created != 0);
+		// Incecure arithmetic: potential overflow
 		users_map[msg.sender].ether_balance += msg.value;
 	}
 
@@ -48,24 +51,24 @@ contract VulnerableOne {
 		users_list.push(_new_user);
 	}
 	
-	//Doc with limit 
-	// can be out of gas
-	// 
 	function remove_user(address _remove_user) public {
 		require(users_map[msg.sender].created != 0);
 		delete(users_map[_remove_user]);
 		bool shift = false;
+        // Potential DOS  if user_list will be increased multiple and can be out of gas
 		for (uint i=0; i<users_list.length; i++) {
 			if (users_list[i] == _remove_user) {
 				shift = true;
 			}
+			// need to add users_list[i] = users_list[i+1]; to first if. More lines, more gas
 			if (shift == true) {
 				users_list[i] = users_list[i+1];
 			}
 		}
 	}
-
+        //indentation problems
 	function withdraw() public {
+        // portential Reentrancy
         msg.sender.transfer(users_map[msg.sender].ether_balance);
 		users_map[msg.sender].ether_balance = 0;
 	}
